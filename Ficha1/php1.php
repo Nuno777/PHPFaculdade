@@ -8,7 +8,10 @@
 </head>
 <body>
     <?php
-    echo "Ola mundo";
+    $nome="Ola mundo";
+    $int=12;
+    $float=5.8;
+    echo "String: $nome </br> Inteiro: $int </br> Float: $float ";
     ?>
 </body>
 </html>
