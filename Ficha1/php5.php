@@ -5,14 +5,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PHP: Operações sobre strings</title>
+    <title>PHP: Utilização de arrays</title>
 </head>
 
 <body>
     <?php
-    $var = "Ola Mundo";
-    $rest=substr($var,4);
-    echo $rest ,"\n",strpos($var,$rest);
+    $num='';
+    for ($i=1; $i < $num ; $i++) { 
+        echo $i;
+    }
     ?>
 </body>
 
