@@ -10,10 +10,22 @@
 
 <body>
     <?php
-    $num='';
-    for ($i=1; $i < $num ; $i++) { 
-        echo $i;
+    $num = range(1, 10);
+    $j = 1;
+    $q = 1;
+    echo "For\n";
+    for ($i = 1; $i <= count($num); $i++) {
+        echo $i, "\n";
     }
+    echo "</br>While\n";
+    while ($q <= 10) {
+        echo $q++, "\n";
+    }
+    echo "</br>Do_While\n";
+    do {
+        echo $j, "\n";
+        $j++;
+    } while ($j <= 10);
     ?>
 </body>
 
