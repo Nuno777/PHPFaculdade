@@ -10,6 +10,7 @@
 
 <body>
     <?php
+    $var="Ola Mundo";
     
     ?>
 </body>
