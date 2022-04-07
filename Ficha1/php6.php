@@ -10,8 +10,12 @@
 
 <body>
     <?php
-    echo "A)";
-    
+    echo "A)\n";
+    function soma($num1=2, $num2=3){
+        $total = $num1 + $num2;
+        return $total;
+      }
+     echo soma();
     ?>
 </body>
 
