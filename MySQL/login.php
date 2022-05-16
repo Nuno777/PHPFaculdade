@@ -1,11 +1,18 @@
 <?php
+session_start();
 $host = "localhost";
 $database = "pws";
 $user = "root";
 $pass = "";
 $conn = new mysqli($host, $user, $pass, $database);
-session_start();
-
+$sql = mysqli_query($conn,"Select * From utilizador");
+$result = mysqli_fetch_assoc($sql);
+echo "<table>"; 
+echo  "<tr><td>Email:</td>";
+echo "<td>".$result["email"]."</td></tr>";
+echo  "<tr><td>Nome:</td>";
+echo "<td>".$result["nome"]."</td></tr>";
+echo "</table>"; 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,7 +25,7 @@ session_start();
 </head>
 
 <body>
-    <form action="listuser.php" method="post">
+    <form method="POST" action="login.php?attempt">
         <label for="">Email</label>
         <input type="email" name="email" id="email">
         <br>
