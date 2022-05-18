@@ -1,24 +1,9 @@
 <?php
-session_start();
-$host = "localhost";
-$database = "pws";
-$userdb = "root";
-$passdb = "";
-$conn = new mysqli($host, $userdb, $passdb, $database);
-$sql = mysqli_query($conn, "Select * From utilizador");
-$result = mysqli_fetch_assoc($sql);
-/* echo "<table>";
-echo  "<tr><td>Email:</td>";
-echo "<td>" . $result["email"] . "</td></tr>";
-echo  "<tr><td>Nome:</td>";
-echo "<td>" . $result["nome"] . "</td></tr>";
-echo "</table>"; */
-
-
+require_once 'conecao.php';
 if (isset($_POST['login'])) {
     $email = ($_POST['email']);
     $password = ($_POST['password']);
-    $password = hash('sha512', $password); //segurança
+    $password = md5($password); //segurança
     $sql = "SELECT*FROM utilizador WHERE email='$email' AND pass='$password'";
     $result = mysqli_query($conn, $sql);
     if (mysqli_num_rows($result) == 1) {
