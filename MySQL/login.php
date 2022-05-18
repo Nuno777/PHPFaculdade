@@ -7,12 +7,13 @@ $passdb = "";
 $conn = new mysqli($host, $userdb, $passdb, $database);
 $sql = mysqli_query($conn, "Select * From utilizador");
 $result = mysqli_fetch_assoc($sql);
-echo "<table>";
+/* echo "<table>";
 echo  "<tr><td>Email:</td>";
 echo "<td>" . $result["email"] . "</td></tr>";
 echo  "<tr><td>Nome:</td>";
 echo "<td>" . $result["nome"] . "</td></tr>";
-echo "</table>";
+echo "</table>"; */
+
 
 if (isset($_POST['login'])) {
     $email = ($_POST['email']);
@@ -21,9 +22,9 @@ if (isset($_POST['login'])) {
     $sql = "SELECT*FROM utilizador WHERE email='$email' AND pass='$password'";
     $result = mysqli_query($conn, $sql);
     if (mysqli_num_rows($result) == 1) {
-        $_SEESION['message'] = "Login com sucesso.";
+        //$_SEESION['message'] = "Login com sucesso.";
         $_SEESION['email'] = $email;
-        header("location: listuser.php"); //vai para o calendario
+        header("location: listuser.php"); //vai para a listagem de users
     } else {
         $_SEESION['message'] = "Email ou Password incorreta, tente novamente.";
     }
@@ -42,20 +43,25 @@ if (isset($_POST['login'])) {
 </head>
 
 <body>
-    <form method="POST" action="login.php">
-        <label for="">Email</label>
-        <input type="email" name="email" id="email">
-        <br>
-        <label for="">Password</label>
-        <input type="password" name="password" id="password">
-        <br>
+    <form class="form" method="POST" action="login.php">
+        <img src="img/estg.png" alt="" srcset="">
+        <br><br>
+        <div class="form-input">
+            <label for="">Email</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="Escreva o email" required>
+        </div>
+        <div class="form-input">
+            <label for="">Password</label>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Escreva a password" required>
+        </div>
         <?php
         if (isset($_SEESION['message'])) {
             echo "<div id='error_msg'>" . $_SEESION['message'] . "</div>";
             unset($_SEESION['message']);
         }
         ?>
-        <button type="submit" name="login">Login</button>
+        <br>
+        <button type="submit" class="btn btn-primary" name="login">Login</button>
     </form>
 </body>
 
