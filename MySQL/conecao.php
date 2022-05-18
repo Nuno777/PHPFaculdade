@@ -1,5 +1,4 @@
 <?php
-session_start();
 $host = "localhost";
 $database = "pws";
 $userdb = "root";

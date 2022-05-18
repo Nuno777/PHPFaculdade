@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once 'conecao.php';
 $sql = mysqli_query($conn, "Select * From utilizador");
 //$result = mysqli_fetch_assoc($sql);
@@ -35,7 +36,7 @@ $sql = mysqli_query($conn, "Select * From utilizador");
             <tbody>
                 <?php
                 foreach ($sql as $result) {
-                    echo "<tr><td>" . $result["email"] . "</td><td>" . $result["nome"] . "</td><td>" . md5($result["pass"]) . "</td></tr>";
+                    echo "<tr><td>" . $result["email"] . "</td><td>" . $result["nome"] . "</td><td>" . ($result["pass"]) . "</td></tr>";
                 }
                 ?>
             </tbody>
