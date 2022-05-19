@@ -1,14 +1,14 @@
 <?php
 session_start();
-include_once("conecao.php");
+include_once 'conecao.php';
 if (isset($_POST['login'])) {
     $email = ($_POST['email']);
     $password = ($_POST['password']);
     //$password = md5($password); //segurança
-    $sql = "SELECT*FROM utilizador WHERE email='$email' AND pass='$password'";
+    $sql = "SELECT * FROM utilizador WHERE email='$email' AND pass='$password'";
     $result = mysqli_query($conn, $sql);
-    if (mysqli_num_rows($result) == 1) {
-        //$_SEESION['message'] = "Login com sucesso.";
+    if (mysqli_num_rows($result) == 0) {
+        $_SEESION['message'] = "Login com sucesso.";
         $_SEESION['email'] = $email;
         header("location: listuser.php"); //vai para a listagem de users
     } else {
