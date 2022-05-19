@@ -3,11 +3,12 @@
     padding: 3px;
 }
 
-.form{
-    width : 350px;
-    padding : 15px;
-    margin : 100px auto;
+.form {
+    width: 350px;
+    padding: 15px;
+    margin: 100px auto;
 }
-.login{
-    text-align : center;
+
+.login {
+    text-align: center;
 }
