@@ -2,7 +2,7 @@
 session_start();
 require_once 'conecao.php';
 $sql = mysqli_query($conn, "Select * From utilizador");
-//$result = mysqli_fetch_assoc($sql);
+$result = mysqli_fetch_assoc($sql);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -29,14 +29,13 @@ $sql = mysqli_query($conn, "Select * From utilizador");
                 <tr>
                     <th scope="col">Email</th>
                     <th scope="col">Nome</th>
-                    <th scope="col">Password</th>
                     <th scope="col">Edição</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
                 foreach ($sql as $result) {
-                    echo "<tr><td>" . $result["email"] . "</td><td>" . $result["nome"] . "</td><td>" . ($result["pass"]) . "</td></tr>";
+                    echo "<tr><td>" . $result["email"] . "</td><td>" . $result["nome"] . "</td><td><a href=''><img src='img/edit.png' alt=''></a><a href=''><img src='img/trash.png' alt=''></a></td></tr>";
                 }
                 ?>
             </tbody>
