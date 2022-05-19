@@ -35,7 +35,10 @@ $result = mysqli_fetch_assoc($sql);
             <tbody>
                 <?php
                 foreach ($sql as $result) {
-                    echo "<tr><td>" . $result["email"] . "</td><td>" . $result["nome"] . "</td><td><a href=''><img src='img/edit.png' class='edit' alt='' ></a><a href=''><img src='img/trash.png' class='trash' alt=''></a></td></tr>";
+                    echo "<tr>";
+                    echo "<td>" . $result["email"] . "</td><td>" . $result["nome"] . "</td>";
+                    echo "<td><a href=''><img src='img/edit.png' class='edit' alt='' ></a><a href=''><img src='img/trash.png' class='trash' alt=''></a></td>";
+                    echo "</tr>";
                 }
                 ?>
             </tbody>
