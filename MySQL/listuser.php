@@ -1,8 +1,8 @@
 <?php
 session_start();
 require_once 'conecao.php';
-$sql = mysqli_query($conn, "Select * From utilizador");
-$result = mysqli_fetch_assoc($sql);
+$query = mysqli_query($conn, "Select * From utilizador");
+$result = mysqli_fetch_assoc($query);
 ?>
 
 <!DOCTYPE html>
@@ -35,19 +35,17 @@ $result = mysqli_fetch_assoc($sql);
             </thead>
             <tbody>
                 <?php
-                foreach ($sql as $result) {
-                    while(()){
-                        $foto = $result->foto;
-                        if($foto==null){
-                            $foto="uploads/semImage.png";
+                foreach ($query as $result) {
+                    /* while ($row = $query->fetch_object()) {
+                        $foto = $row->foto;
+                        if ($foto == null) {
+                            $foto = 'uploads/semImage.png';
                         }
-                    }
-                   
-
+                    } */
                     echo "<tr>";
-                    echo "<td> <img src='$foto' alt='Image' height='50px'></td>";
+                    echo "<td><img src='$foto' alt='Imagem' height='50px'/></td>";
                     echo "<td>" . $result["email"] . "</td><td>" . $result["nome"] . "</td>";
-                    echo "<td><a href=''><img src='img/edit.png' class='edit' alt='' ></a><a href=''><img src='img/trash.png' class='trash' alt=''></a></td>";
+                    echo "<td><a href=''><img src='img/edit.png' class='edit' alt='Edit' ></a><a href=''><img src='img/trash.png' class='trash' alt='Clear'></a></td>";
                     echo "</tr>";
                 }
                 ?>

@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       $pass_hash = hash('sha512', $pass);
 
       /* 2: executar query... */
-      $query = "INSERT INTO 'utilizador' ('email', 'nome', 'pass') VALUES ('$email', '$nome', '$pass_hash')";
+      $query = "INSERT INTO `utilizador` (`email`, `nome`, `pass`) VALUES ('$email', '$nome', '$pass_hash')";
 
       if ($foto != "" && getimagesize($_FILES['foto']['tmp_name'])) {
         // tratar upload da foto
@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $novo_ficheiro = $diretoria_upload . sha1(microtime()) . "." . $extensao;
 
         if (move_uploaded_file($_FILES['foto']['tmp_name'], $novo_ficheiro)) {
-          $query = "INSERT INTO 'utilizador' ('email', 'nome', 'pass', 'foto') VALUES ('$email', '$nome', '$pass_hash', '$novo_ficheiro')";
+          $query = "INSERT INTO `utilizador` (`email`, `nome`, `pass`, `foto`) VALUES ('$email', '$nome', '$pass_hash', '$novo_ficheiro')";
         }
       }
 
