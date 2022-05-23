@@ -29,7 +29,7 @@ if (isset($_POST['login'])) {
 </head>
 
 <body>
-    <form class="form" method="POST" action="login.php">
+    <form class="form" method="POST" action="login.php" enctype="multipart/form-data">
         <img src="img/estg.png" alt="" srcset="">
         <br><br>
         <div class="form-input">
