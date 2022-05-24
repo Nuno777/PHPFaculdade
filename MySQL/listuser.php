@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 require_once 'conecao.php';
 $query = "SELECT * FROM utilizador";
 $result = mysqli_query($conn, $query);
@@ -47,8 +46,8 @@ $result = mysqli_query($conn, $query);
                     echo "<td><img src='$foto' alt='Imagem' height='50px'></td>";
                     echo "<td>" . $row->email . "</td><td>" . $row->nome . "</td>";
                     echo "<td><a href='insertUser.php'><img src='img/new.png' alt='Edit'></a></td>";
-                    echo "<td><a href='editUser.php?email=$row->email'><img src='img/edit.png' alt='Edit'></a></td>";
-                    echo "<td><a href='deleteUser.php'><img src='img/delete.png' alt='Delete'></a></td>";
+                    echo "<td><a href='editUser.php?email=$row->email' name='edit'><img src='img/edit.png' alt='Edit'></a></td>";
+                    echo "<td><a href='deleteUser.php?email=$row->email' name='delete'><img src='img/delete.png' alt='Delete'></a></td>";
                     echo "</tr>";
                 }
                 ?>
