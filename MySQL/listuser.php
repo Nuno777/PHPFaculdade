@@ -1,8 +1,10 @@
 <?php
 session_start();
+
 require_once 'conecao.php';
-$query = mysqli_query($conn, "Select * From utilizador");
-$result = mysqli_fetch_assoc($query);
+$query = "SELECT * FROM utilizador";
+$result = mysqli_query($conn, $query);
+
 ?>
 
 <!DOCTYPE html>
@@ -14,7 +16,7 @@ $result = mysqli_fetch_assoc($query);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
-    <title>Listar Users</title>
+    <title>List Users</title>
 </head>
 
 <body>
@@ -22,7 +24,7 @@ $result = mysqli_fetch_assoc($query);
         <div class="row">
             <div class="col-12">
                 <br>
-                <h2>Listar Users</h2>
+                <h2>List Users</h2>
             </div>
         </div>
         <table class="table table-striped">
@@ -35,17 +37,18 @@ $result = mysqli_fetch_assoc($query);
             </thead>
             <tbody>
                 <?php
-                foreach ($query as $result) {
-                    /* while ($row = $query->fetch_object()) {
-                        $foto = $row->foto;
-                        if ($foto == null) {
-                            $foto = 'uploads/semImage.png';
-                        }
-                    } */
+                //$foto = null;
+                while ($row = $result->fetch_object()) {
+                    $foto = $row->foto;
+                    if ($foto == null) {
+                        $foto = 'uploads/semImage.png';
+                    }
                     echo "<tr>";
-                    echo "<td><img src='$foto' alt='Imagem' height='50px'/></td>";
-                    echo "<td>" . $result["email"] . "</td><td>" . $result["nome"] . "</td>";
-                    echo "<td><a href=''><img src='img/edit.png' class='edit' alt='Edit' ></a><a href=''><img src='img/trash.png' class='trash' alt='Clear'></a></td>";
+                    echo "<td><img src='$foto' alt='Imagem' height='50px'></td>";
+                    echo "<td>" . $row->email . "</td><td>" . $row->nome . "</td>";
+                    echo "<td><a href='insertUser.php'><img src='img/new.png' alt='Edit'></a></td>";
+                    echo "<td><a href='editUser.php?email=$row->email'><img src='img/edit.png' alt='Edit'></a></td>";
+                    echo "<td><a href='deleteUser.php'><img src='img/delete.png' alt='Delete'></a></td>";
                     echo "</tr>";
                 }
                 ?>
