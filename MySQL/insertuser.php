@@ -1,10 +1,9 @@
 <?php
 session_start();
-if (!isset($_SESSION['authenticated'])) {
+/* if (!isset($_SESSION['authenticated'])) {
     header('Location: login.php');
     exit(0);
-}
-
+} */
 // se possível, ler variáveis de POST
 $email = array_key_exists('email', $_POST) ? $_POST['email'] : "";
 $nome = array_key_exists('nome', $_POST) ? $_POST['nome'] : "";
