@@ -1,5 +1,9 @@
 <?php
 session_start();
+if (!isset($_SESSION['authenticated'])) {
+    header('Location: logout.php');
+    exit(0);
+}
 require_once 'conecao.php';
 if (isset($_POST['login'])) {
     $email = $_POST['email'];
@@ -29,7 +33,7 @@ if (isset($_POST['login'])) {
 </head>
 
 <body>
-    <form class="form" method="POST" action="login.php" enctype="multipart/form-data">
+    <form class="form" method="POST" action="auth.php" enctype="multipart/form-data">
         <img src="img/estg.png" alt="" srcset="">
         <br><br>
         <div class="form-input">

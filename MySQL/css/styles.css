@@ -2,6 +2,9 @@
     color: red;
     padding: 3px;
 }
+#erro {
+    color: red;
+}
 
 .form {
     width: 350px;

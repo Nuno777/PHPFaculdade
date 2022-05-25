@@ -1,9 +1,9 @@
 <?php
 session_start();
-/* if (!isset($_SESSION['authenticated'])) {
-  header('Location: login.php');
-  exit(0);
-} */
+if (!isset($_SESSION['authenticated'])) {
+    header('Location: login.php');
+    exit(0);
+}
 
 // se possível, ler variáveis de POST
 $email = array_key_exists('email', $_POST) ? $_POST['email'] : "";
@@ -15,14 +15,14 @@ $msg_erro = "";
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // validar variáveis
     if ($email == "" || $pass == "" || $nome == "")
-        $msg_erro = "ERRO: email, nome e password são campos obrigatórios!";
+        $msg_erro = "Email, nome ou password não inseridos";
     else {
         /* 1: estabelecer ligação à BD */
         require_once 'conecao.php';
         if ($conn->connect_errno) {
             $code = $conn->connect_errno;
             $message = $conn->connect_error;
-            $msg_erro = "ERRO: Falha na ligação à BD ($code $message)!";
+            $msg_erro = "Falha na ligação à BaseDados ($code $message)!";
         } else {
             // descontaminar variáveis
             $email = $conn->real_escape_string($email);
@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             } else {
                 $code = $conn->errno; // error code of the most recent operation
                 $message = $conn->error; // error message of the most recent op.
-                $msg_erro = "ERRO: Falha na query! ($code $message)";
+                $msg_erro = "Falha na query! ($code $message)";
             }
         }
     }
@@ -71,11 +71,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </head>
 
 <body>
+    <header id="header">
+        <?php
+        require_once 'navbar.php';
+        ?>
+    </header>
     <div class="container">
-        <?php if ($msg_erro != "") { ?>
-            <p id="erro"><?= $msg_erro ?></p>
-        <?php } ?>
-
         <form action="insertUser.php" id="insertUser" class="form" method="POST" enctype="multipart/form-data">
             <div class="row">
                 <div class="col-12" class="form">
@@ -99,8 +100,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <label for="idFoto">Foto</label>
                 <input type="file" class="form-control" id="idFoto" name="foto"><br>
             </div>
+            <?php if ($msg_erro != "") { ?>
+                <p id="erro"><?= $msg_erro ?></p>
+            <?php } ?>
             <button type="submit" class="btn btn-primary" name="register">Register</button>
-            <a href="listUser.php" class="btn btn-secondary">Back</a>
         </form>
     </div>
 </body>
