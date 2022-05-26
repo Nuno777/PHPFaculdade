@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             $sucesso_query = $conn->query($query);
             if ($sucesso_query) {
-                header("Location: listUser.php");
+                header("Location: listuser.php");
                 exit(0);
             } else {
                 $code = $conn->errno; // error code of the most recent operation
