@@ -3,7 +3,7 @@ session_start();
 if (!isset($_SESSION['authenticated'])) {
     header('Location: login.php');
     exit(0);
-} 
+}
 require_once 'conecao.php';
 $query = "SELECT * FROM utilizador";
 $result = mysqli_query($conn, $query);
