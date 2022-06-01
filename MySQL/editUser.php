@@ -4,31 +4,27 @@ if (!isset($_SESSION['authenticated'])) {
     header('Location: login.php');
     exit(0);
 }
-$email = $_GET["email"];
-$nome = $_GET["nome"];
-$pass = $_GET["pass"];
+$email = array_key_exists('email', $_GET) ? $_GET['email'] : "";
+$nome = array_key_exists('nome', $_GET) ? $_GET['nome'] : "";
+$pass = array_key_exists('pass', $_GET) ? $_GET['pass'] : "";
+// $foto = array_key_exists('foto', $_FILES) ? $_FILES['foto']['name'] : "";
 
 $msg_erro = "";
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // validar variáveis
     if ($email == "" || $pass == "" || $nome == "")
         $msg_erro = "Email, nome ou password não inseridos";
     else {
-        /* 1: estabelecer ligação à BD */
         require_once 'conecao.php';
         if ($conn->connect_errno) {
             $code = $conn->connect_errno;
             $message = $conn->connect_error;
             $msg_erro = "Falha na ligação à BaseDados ($code $message)!";
         } else {
-            // descontaminar variáveis
             $email = $conn->real_escape_string($email);
             $nome = $conn->real_escape_string($nome);
-            // $pass não precisa porque não será usada diretamente na query
             $pass_hash = hash('sha512', $pass);
 
-            $query = "UPDATE utilizador SET email='$email' ,nome='$nome' ,pass='$pass' WHERE email='$email'";
-
+            $query = "UPDATE utilizador SET email='$email' ,nome='$nome' ,pass='$pass_hash' WHERE email='$email'";
             /* if ($foto != "" && getimagesize($_FILES['foto']['tmp_name'])) {
                 // tratar upload da foto
                 $diretoria_upload = "uploads/";
@@ -39,14 +35,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     $query = "UPDATE utilizador SET email='$email' ,nome='$nome' ,pass='$pass',foto='$novo_ficheiro' WHERE email='$email'";
                 }
             } */
-
             $sucesso_query = mysqli_query($conn, $query);
             if ($sucesso_query) {
                 header("Location: listuser.php");
                 exit(0);
             } else {
-                $code = $conn->errno; // error code of the most recent operation
-                $message = $conn->error; // error message of the most recent op.
+                $code = $conn->errno;
+                $message = $conn->error;
                 $msg_erro = "Falha na query! ($code $message)";
             }
         }
@@ -72,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         ?>
     </header>
     <div class="container">
-        <form action="insertUser.php" id="insertUser" class="form" method="POST" enctype="multipart/form-data">
+        <form action="editUser.php" id="editUser" class="form" method="POST" enctype="multipart/form-data">
             <div class="row">
                 <div class="col-12" class="form">
                     <h2>Edit User</h2>
@@ -85,7 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
             <div class="form-input">
                 <label for="nome">Nome</label>
-                <input type="text" class="form-control" id="nome" name="nome" value="<?= $nome = htmlspecialchars($nome) ?>" required>
+                <input type="text" class="form-control" id="nome" name="nome" value="<?= $nome ?>" required>
             </div>
             <div class="form-input">
                 <label for="pass">Password</label>
@@ -95,7 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <label for="idFoto">Foto</label>
                 <input type="file" class="form-control" id="foto" name="foto"><br>
             </div>
-            <button type="submit" class="btn btn-primary" name="update">Update</button>
+            <button type="submit" class="btn btn-primary" name="update">Edit</button>
         </form>
     </div>
 </body>
