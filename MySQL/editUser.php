@@ -25,6 +25,7 @@
     }
     require_once 'conecao.php';
     $email = $_GET["email"];
+    $email = $conn->real_escape_string($email);
     $query = "SELECT nome,foto FROM utilizador WHERE email='$email'";
     $result = mysqli_query($conn, $query);
     if ($result && $result->num_rows) {
@@ -36,7 +37,7 @@
         }
     ?>
         <div class="container">
-            <form action="editUser.php" name="editUser" class="form" method="POST" enctype="multipart/form-data">
+            <form action="editUser.php" id="editUser" class="form" method="POST" enctype="multipart/form-data">
                 <div class="row">
                     <div class="col-12" class="form">
                         <h2>Edit User</h2>
@@ -60,39 +61,12 @@
         </div>
     <?php
     } else {
-        echo "<script>alert('Selecione um utilizador valido')</script> <?php header('Location: listuser.php')?>";
+        echo "<script>alert('Selecione um utilizador valido');window.location='listuser.php'</script>";
     }
-    /*     
 
-    $msg_erro = "";
-    if ($conn->connect_errno) {
-    $code = $conn->connect_errno;
-    $message = $conn->connect_error;
-    $msg_erro = "Falha na ligação à BaseDados ($code $message)!";
-    } else {
-    $email = $conn->real_escape_string($email);
-    $nome = $conn->real_escape_string($nome);
-    $query = "SELECT nome,foto FROM utilizador WHERE email='$email'";
-    $result = mysqli_query($conn, $query);
-    if ($result && $result->num_rows) {
-    $row = $result->fetch_object();
-    $nome = $row->nome;
-    $foto = $row->foto;
-    if ($foto == null) {
-    $foto = "";
-    } /* else {
-    echo "<script>
-        alert('Selecione um utilizador valido')
-    </script>";
-
-    }
-    header("Location: listuser.php");
-    } else {
-    $code = $conn->errno;
-    $message = $conn->error;
-    $msg_erro = "Falha na query! ($code $message)";
-    }
-    }  */
+    /*     if (isset($_POST["#edituser"])) {
+        $query = "UPDATE utilizador SET nome='$nome',foto='$foto' WHERE email='$email'";
+    } */
     ?>
 
 </body>
