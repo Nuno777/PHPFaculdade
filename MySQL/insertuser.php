@@ -3,14 +3,14 @@ session_start();
 if (!isset($_SESSION['authenticated'])) {
     header('Location: login.php');
     exit(0);
-} 
+}
 // se possível, ler variáveis de POST
 $email = array_key_exists('email', $_POST) ? $_POST['email'] : "";
 $nome = array_key_exists('nome', $_POST) ? $_POST['nome'] : "";
 $pass = array_key_exists('pass', $_POST) ? $_POST['pass'] : "";
 $foto = array_key_exists('foto', $_FILES) ? $_FILES['foto']['name'] : "";
-
 $msg_erro = "";
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // validar variáveis
     if ($email == "" || $pass == "" || $nome == "")
