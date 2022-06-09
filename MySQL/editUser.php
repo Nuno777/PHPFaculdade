@@ -57,7 +57,7 @@
                 </div>
                 <div class="form-input">
                     <label for="email">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" value="<?= $email ?>" required readonly>
+                     <input type="email" class="form-control" id="email" name="email" value="<?= $email ?>" required readonly> <!--nao se pode alterar o email com readonly -->
                 </div>
                 <div class="form-input">
                     <label for="nome">Nome</label>
