@@ -72,7 +72,7 @@
         </div>
     <?php
     } else {
-        echo "<script>alert('Selecione um utilizador invalido');window.location='listuser.php'</script>";
+        echo "<script>alert('Selecione um utilizador valido');window.location='listuser.php'</script>";
     }
 
    
